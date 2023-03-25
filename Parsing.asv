@@ -2,6 +2,11 @@ parsCMD = 82;
 deviceCounter = 16;
 counterOfCol = 8;
 
+k = 1;
+km = num2str(k);
+pm = 'Graph#';
+lm = strcat(pm,km);
+
 f = fopen('UL_B4.txt_2023-03-20 10_47_21.txt');
 format = '{"tag":%f,"cmd":%f,"data":%*18s}{"value":[%f,%f,%f,%f,%f,%f]}';
 data = textscan(f,format,'CollectOutput',1);
@@ -31,9 +36,6 @@ for i = 1:deviceCounter
     end
 end
 
-legentStringCell = {};
-legendCounter = 0;
-
 figure 
 for i = 1:deviceCounter
     currentDataLength = countersOfReadyDataForPloting(i);
@@ -45,14 +47,18 @@ for i = 1:deviceCounter
         
         x  = linspace(1, currentDataLength, currentDataLength);
         
+        legendCounter = 0;
         legendCounter = legendCounter + 1;
-        strNumber = num2str(i);
-        fullStrForLegend = strcat('Device#', strNumber);
-        legentStringCell{1,legendCounter} = fullStrForLegend;
-        
+        legentStringCell = {};
+
         subplot(2,1,1) 
         plot(x, emptyMatrixForFlotting(:,3));
-        legend(legentStringCell);
+        
+        strNumber = num2str(i);
+        fullStrFor
+        legentStringCell{1,legendCounter} = 'Graph#'
+        
+        legend(a);
         hold on
         grid on
         title('Blue Diode')
@@ -61,12 +67,16 @@ for i = 1:deviceCounter
         
         subplot(2,1,2)
         plot(x, emptyMatrixForFlotting(:,4));
-        legend(legentStringCell);
+        a = {'p','k','l'};
+        legend(a);
         hold on
         grid on
         title('Red Diode')
         xlabel 'Smoke level';
         ylabel 'time';
+        
+        
+        
     end
 end
 
