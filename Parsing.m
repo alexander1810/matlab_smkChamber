@@ -34,6 +34,14 @@ end
 legentStringCell = {};
 legendCounter = 0;
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ca = 0.0001;
+cb = 0.001;
+cc = 3;
+x_target = linspace(0,length(x),length(x));
+y_target = ca*(x_target.^2)+cb*x_target+cc;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 figure 
 for i = 1:deviceCounter
     currentDataLength = countersOfReadyDataForPloting(i);
@@ -49,6 +57,8 @@ for i = 1:deviceCounter
         strNumber = num2str(i);
         fullStrForLegend = strcat('Device#', strNumber);
         legentStringCell{1,legendCounter} = fullStrForLegend;
+        
+        mx = emptyMatrixForFlotting(:,3);
         
         subplot(2,1,1) 
         plot(x, emptyMatrixForFlotting(:,3));
@@ -69,6 +79,11 @@ for i = 1:deviceCounter
         ylabel 'time';
     end
 end
+
+% subplot(2,1,1)
+% plot(x_target, y_target,'-*');
+% subplot(2,1,2)
+% plot(x_target, y_target,'-*');
 
 fclose(f);
 
